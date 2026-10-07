@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Leonardo 2022</title>
+
+  <meta name="description" content="Leonardo 2022. Joga no browser ou faz download para Android ou Windows.">
+
+  <link rel="canonical" href="https://www.jogodoleonardo.pt/pt/">
+  <link rel="alternate" href="https://www.jogodoleonardo.pt/pt/" hreflang="pt">
+  <link rel="alternate" href="https://www.jogodoleonardo.pt/en/" hreflang="en">
+  <link rel="alternate" href="https://www.jogodoleonardo.pt/" hreflang="x-default">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+    
+  <meta property="og:title" content="Leonardo 2022">
+  <meta property="og:description" content="Joga no browser ou faz download para Android ou Windows.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/Ricano/exports/refs/heads/main/sword_icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.jogodoleonardo.pt/pt/">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Leonardo 2022">
+  <meta name="twitter:description" content="Joga no browser ou faz download para Android ou Windows.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/Ricano/exports/refs/heads/main/sword_icon.png">
+    
+
+
+
+</head>
+
+<body>
+
+<!-- Language Selector -->
+<div class="lang-selector">
+  <a href="/pt/"><img src="/assets/pt-flag.png" alt="Português" class="active"></a>
+  <a href="/en/"><img src="/assets/uk-flag.png" alt="English"></a>
+</div>
+
+<h1>Leonardo 2022</h1>
+<img class="icon" src="https://raw.githubusercontent.com/Ricano/exports/refs/heads/main/sword_icon.png" alt="Ícone da Espada">
+
+<a id="info-link" class="btn" target="_blank" href="https://github.com/Ricano/leonardo_exports/tree/main?tab=readme-ov-file#leonardo-2022--" rel ="noopener noreferrer">
+  INFO
+</a>
+
+<br>
+
+<a id="apk-link" class="btn" href="https://raw.githubusercontent.com/Ricano/exports/refs/heads/main/builds/android/Leonardo2022_0.3.8.apk">
+  Descarregar para Android (.APK)
+</a>
+
+<a id="exe-link" class="btn" href="https://raw.githubusercontent.com/Ricano/exports/refs/heads/main/builds/windows/Leonardo2022.zip">
+  Descarregar para Windows (.EXE)
+</a>
+
+<div class="links">
+  <button id="keyboard-btn">Jogar no Navegador *</button>
+  <button id="touch-btn">Jogar no Navegador *</button>
+
+  <div id="warning" style="display:block; color: var(--fg); font-size:0.8em; opacity:0.7; margin-top:-10px;">
+    * Não otimizado. A experiência pode ser inferior ao esperado.
+  </div>
+</div>
+
+<div id="overlay" class="overlay">
+  <div class="overlay-controls">
+    <button id="fullscreenBtn">⛶</button>
+    <button id="closeBtn">✕</button>
+  </div>
+  <iframe id="gameFrame" allowfullscreen></iframe>
+</div>
+
+  <footer>
+    <a href="https://ricano.github.io/site/" target="_blank" rel ="noopener noreferrer">
+      Ricardo Caetano © <span id="year"></span>
+    </a>
+  </footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  const keyboardBtn = document.getElementById('keyboard-btn');
+  const touchBtn = document.getElementById('touch-btn');
+  const overlay = document.getElementById('overlay');
+  const gameFrame = document.getElementById('gameFrame');
+  const closeBtn = document.getElementById('closeBtn');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+  const keyboardURL = "https://ricano.github.io/leonardo_exports/keyboard/leonardo2022.html";
+  const touchURL = "https://ricano.github.io/leonardo_exports/touch/leonardo2022.html";
+
+  if (isTouchDevice) {
+    keyboardBtn.style.display = 'none';
+  } else {
+    touchBtn.style.display = 'none';
+  }
+
+  function openGame(url) {
+    gameFrame.src = url;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGame() {
+    overlay.classList.remove('active');
+    setTimeout(() => { gameFrame.src = ""; }, 400);
+    document.body.style.overflow = 'auto';
+  }
+
+  function toggleFullscreen() {
+    const iframe = gameFrame;
+    if (!document.fullscreenElement) {
+      iframe.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+  }
+
+  keyboardBtn.addEventListener('click', () => openGame(keyboardURL));
+  touchBtn.addEventListener('click', () => openGame(touchURL));
+  closeBtn.addEventListener('click', closeGame);
+  fullscreenBtn.addEventListener('click', toggleFullscreen);
+  window.addEventListener('keydown', e => { if (e.key === "Escape") closeGame(); });
+</script>
+
+</body>
+</html>

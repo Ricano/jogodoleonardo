@@ -1,0 +1,8 @@
+# Force redirect from non-www to www
+RewriteEngine On
+
+# If the hostname is jogodoleonardo.pt (no www)
+RewriteCond %{HTTP_HOST} ^jogodoleonardo\.pt$ [NC]
+
+# Redirect everything to www version with HTTPS
+RewriteRule ^(.*)$ https://www.jogodoleonardo.pt/$1 [L,R=301]

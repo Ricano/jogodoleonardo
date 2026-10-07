@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Jogo do Leonardo</title>
+
+  <!-- Search engines shouldn't index this redirect page -->
+  <meta name="robots" content="noindex">
+
+  <!-- Fallback for JS-disabled browsers -->
+  <meta http-equiv="refresh" content="0; URL=/en/">
+
+  <script>
+    (function () {
+      // Countries where Portuguese is the official language
+      const ptCountries = [
+        "PT", "BR", "AO", "MZ", "CV", "GW", "ST", "TL"
+      ];
+
+      // Avoid redirecting crawlers
+      const ua = navigator.userAgent.toLowerCase();
+      const isBot =
+        /bot|crawl|spider|google|bing|yandex|duckduck|baidu|slurp/.test(ua);
+
+      if (isBot) return;
+
+      // Query working geolocation API
+      fetch("https://ipwho.is/?fields=country_code")
+        .then(r => r.json())
+        .then(data => {
+          const code = (data.country_code || "").toUpperCase();
+          if (ptCountries.includes(code)) {
+            window.location.href = "/pt/";
+          } else {
+            window.location.href = "/en/";
+          }
+        })
+        .catch(() => {
+          // Fallback if API fails
+          window.location.href = "/en/";
+        });
+    })();
+  </script>
+
+</head>
+<body>
+</body>
+</html>
