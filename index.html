@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex">
 
   <!-- Fallback for JS-disabled browsers -->
-  <meta http-equiv="refresh" content="0; URL=/en/">
+  <meta http-equiv="refresh" content="0; URL=./en/">
 
   <script>
     (function () {
@@ -30,14 +30,14 @@
         .then(data => {
           const code = (data.country_code || "").toUpperCase();
           if (ptCountries.includes(code)) {
-            window.location.href = "/pt/";
+            window.location.href = "./pt/";
           } else {
-            window.location.href = "/en/";
+            window.location.href = "./en/";
           }
         })
         .catch(() => {
           // Fallback if API fails
-          window.location.href = "/en/";
+          window.location.href = "./en/";
         });
     })();
   </script>
